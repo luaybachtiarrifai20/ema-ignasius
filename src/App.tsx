@@ -4,7 +4,7 @@ import {
   Heart,
   MapPin,
   Clock,
-  MessageCircle,
+  // MessageCircle,
   Music,
   Pause,
   ChevronDown,
@@ -78,7 +78,7 @@ const sectionVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, ease: "easeOut" },
+    transition: { duration: 0.7, ease: "easeOut" as const },
   },
 };
 
