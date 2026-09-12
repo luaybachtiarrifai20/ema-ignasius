@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Playfair Display", serif;
+  --font-sans: "Inter", sans-serif;
+  --font-script: "Great Vibes", cursive;
+  
+  --color-cream: #FDF8F3;
+  --color-soft-pink: #F8E8E0;
+  --color-blush: #E8C4B8;
+  --color-rose: #C9A89A;
+  --color-taupe: #A68B7B;
+  --color-brown: #6B4F4F;
+  --color-dark: #3D2C2C;
+  --color-gold: #C9A227;
+  --color-soft-gold: #D4AF37;
+}
+
+html {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-cream);
+  color: var(--color-dark);
+  overflow-x: hidden;
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-script {
+  font-family: var(--font-script);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-soft-pink);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-rose);
+  border-radius: 3px;
+}
+
+/* Decorative line */
+.ornament-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-rose), transparent);
+}
+
+/* Soft gradient backgrounds */
+.bg-soft-gradient {
+  background: linear-gradient(180deg, var(--color-cream) 0%, var(--color-soft-pink) 50%, var(--color-cream) 100%);
+}
+
+.bg-cover-gradient {
+  background: linear-gradient(135deg, #FDF8F3 0%, #F8E8E0 40%, #E8C4B8 100%);
+}
+
+@keyframes kenburns {
+  0% {
+    transform: scale(1);
+  }
+  20% {
+    transform: scale(1);        /* jeda di ukuran kecil */
+  }
+  50% {
+    transform: scale(1.12);     /* membesar */
+  }
+  70% {
+    transform: scale(1.12);     /* jeda di ukuran besar */
+  }
+  100% {
+    transform: scale(1);        /* kembali mengecil */
+  }
+}
+
+.bg-kenburns {
+  animation: kenburns 18s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Scroll snap untuk efek 1 section = 1 layar */
+
+.section-snap {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
