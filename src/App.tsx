@@ -143,13 +143,13 @@ function FlipCard({
 
       {/* Nama lengkap di bawah */}
       <motion.h3
-        className="font-serif text-2xl text-brown mb-1"
+        className="font-serif text-2xl text-white mb-1"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 + delay / 1000 }}>
         {fullName}
       </motion.h3>
-      <p className="text-sm text-taupe">
+      <p className="text-sm text-white/80">
         {name === couple.bride.name ? "Mempelai Wanita" : "Mempelai Pria"}
       </p>
     </div>
