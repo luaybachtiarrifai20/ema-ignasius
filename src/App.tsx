@@ -41,7 +41,7 @@ const events = [
     date: "10",
     month: "Oktober",
     year: "2026",
-    time: "Pukul 18.00 - selesai",
+    time: "18.00",
     place: "Sejabin, Dusun Engkersik 1, Desa Engkersik, Kec. Sekadau Hilir",
     maps: "https://www.google.com/maps/place/Engkersik,+Kec.+Sekadau+Hilir,+Kabupaten+Sekadau,+Kalimantan+Barat/@-0.0893511,111.0541635,13z/data=!3m1!4b1!4m6!3m5!1s0x2e01f89e4a57785b:0x59291de55ed2906c!8m2!3d-0.0783852!4d111.1056539!16s%2Fg%2F121p7c7k?entry=ttu&g_ep=EgoyMDI2MDkwOS4wIKXMDSoASAFQAw%3D%3D",
   },
@@ -489,45 +489,103 @@ export default function App() {
           {/* ACARA */}
           <AnimatedSection>
             <SectionTitle subtitle="Save The Date">Acara</SectionTitle>
-            <div className="max-w-3xl mx-auto space-y-6">
+
+            <div className="max-w-md mx-auto">
               {events.map((ev) => (
                 <div
                   key={ev.title}
-                  className="bg-white/85 backdrop-blur-md rounded-3xl p-8 shadow-lg border border-white/40">
-                  <div className="flex flex-col md:flex-row md:items-center gap-6">
-                    <div className="flex-shrink-0 text-center md:text-left">
-                      <p className="text-taupe text-sm tracking-widest uppercase">
-                        {ev.day}
-                      </p>
-                      <p className="font-serif text-5xl font-semibold text-brown leading-none my-1">
-                        {ev.date}
-                      </p>
-                      <p className="text-taupe">
-                        {ev.month} {ev.year}
-                      </p>
-                    </div>
-                    <div className="hidden md:block w-px h-20 bg-blush" />
-                    <div className="flex-1 text-center md:text-left">
-                      <h3 className="font-serif text-2xl text-brown mb-3">
-                        {ev.title}
-                      </h3>
-                      <div className="space-y-2 text-sm text-taupe">
-                        <p className="flex items-center justify-center md:justify-start gap-2">
-                          <Clock className="w-4 h-4 text-rose" /> {ev.time}
-                        </p>
-                        <p className="flex items-center justify-center md:justify-start gap-2">
-                          <MapPin className="w-4 h-4 text-rose" /> {ev.place}
-                        </p>
-                      </div>
-                      <a
-                        href={ev.maps}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 mt-4 px-5 py-2 text-sm bg-brown text-cream rounded-full hover:bg-dark transition-colors">
-                        <MapPin className="w-4 h-4" /> Lihat Maps
-                      </a>
+                  className="bg-white/90 backdrop-blur-md rounded-3xl p-8 shadow-xl border border-white/50 text-center">
+                  {/* Icon Kalender */}
+                  <div className="flex justify-center mb-6">
+                    <div className="w-11 h-11 rounded-full border border-brown/30 flex items-center justify-center">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="22"
+                        height="22"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="text-brown">
+                        <rect
+                          width="18"
+                          height="18"
+                          x="3"
+                          y="4"
+                          rx="2"
+                          ry="2"
+                        />
+                        <line x1="16" x2="16" y1="2" y2="6" />
+                        <line x1="8" x2="8" y1="2" y2="6" />
+                        <line x1="3" x2="21" y1="10" y2="10" />
+                      </svg>
                     </div>
                   </div>
+
+                  {/* Tanggal */}
+                  <div className="flex items-center justify-center gap-5 mb-2">
+                    {/* Bulan (kiri) */}
+                    <div className="flex flex-col items-center w-16">
+                      <div className="h-px w-12 bg-brown/50 mb-1.5" />
+                      <span className="text-sm tracking-[0.2em] text-brown uppercase font-medium">
+                        {ev.month.slice(0, 3)}
+                      </span>
+                      <div className="h-px w-12 bg-brown/50 mt-1.5" />
+                    </div>
+
+                    {/* Tanggal besar */}
+                    <span className="font-serif text-6xl md:text-7xl font-medium text-brown leading-none">
+                      {ev.date}
+                    </span>
+
+                    {/* Tahun (kanan) */}
+                    <div className="flex flex-col items-center w-16">
+                      <div className="h-px w-12 bg-brown/50 mb-1.5" />
+                      <span className="text-sm tracking-[0.2em] text-brown uppercase font-medium">
+                        {ev.year}
+                      </span>
+                      <div className="h-px w-12 bg-brown/50 mt-1.5" />
+                    </div>
+                  </div>
+
+                  {/* Hari */}
+                  <p className="text-xs tracking-[0.25em] text-taupe uppercase mb-8">
+                    {ev.day}
+                  </p>
+
+                  {/* Lokasi */}
+                  <div className="flex flex-col items-center mb-7">
+                    <MapPin
+                      className="w-8 h-8 text-brown mb-2.5"
+                      strokeWidth={1.5}
+                    />
+                    <p className="text-sm text-brown leading-relaxed max-w-xs">
+                      {ev.place}
+                    </p>
+                  </div>
+
+                  {/* Waktu */}
+                  <div className="flex flex-col items-center mb-8">
+                    <Clock
+                      className="w-8 h-8 text-brown mb-2.5"
+                      strokeWidth={1.5}
+                    />
+                    <p className="text-base tracking-wide text-brown font-medium">
+                      {ev.time}
+                    </p>
+                  </div>
+
+                  {/* Tombol Maps */}
+                  <a
+                    href={ev.maps}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-6 py-2.5 text-sm bg-brown text-cream rounded-full hover:bg-dark transition-colors">
+                    <MapPin className="w-4 h-4" />
+                    Lihat Maps
+                  </a>
                 </div>
               ))}
             </div>
