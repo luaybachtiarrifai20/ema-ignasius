@@ -12,6 +12,8 @@ import {
   Check,
 } from "lucide-react";
 import bgUtama from "./assets/bg-utama.jpg";
+import brideImg from "./assets/brideImg.png";
+import groomImg from "./assets/groomImg.png";
 import song from "./assets/Crazier.mp3";
 import { useWedding } from "./context/WeddingContext";
 import { RsvpSection } from "./components/RsvpSection";
@@ -23,12 +25,12 @@ const couple = {
   bride: {
     name: "Ema",
     fullName: "Rosalia Ema Tutut",
-    parents: "Anak Tunggal",
+    // parents: "Anak Tunggal",
   },
   groom: {
     name: "Ignasius",
     fullName: "Ignasius Usaros",
-    parents: "Anak ke dua dari 3 bersaudara",
+    // parents: "Anak ke dua dari 3 bersaudara",
   },
 };
 
@@ -40,7 +42,7 @@ const events = [
     month: "Oktober",
     year: "2026",
     time: "Pukul 18.00 - selesai",
-    place: "Dusun Engkersik 1, Desa Engkersik Kec. Sekadau Hilir",
+    place: "Sejabin, Dusun Engkersik 1, Desa Engkersik, Kec. Sekadau Hilir",
     maps: "https://www.google.com/maps/place/Engkersik,+Kec.+Sekadau+Hilir,+Kabupaten+Sekadau,+Kalimantan+Barat/@-0.0893511,111.0541635,13z/data=!3m1!4b1!4m6!3m5!1s0x2e01f89e4a57785b:0x59291de55ed2906c!8m2!3d-0.0783852!4d111.1056539!16s%2Fg%2F121p7c7k?entry=ttu&g_ep=EgoyMDI2MDkwOS4wIKXMDSoASAFQAw%3D%3D",
   },
 ];
@@ -82,6 +84,78 @@ const sectionVariants = {
   },
 };
 
+function FlipCard({
+  name,
+  fullName,
+  image,
+  delay = 0,
+}: {
+  name: string;
+  fullName: string;
+  image: string;
+  delay?: number;
+}) {
+  const [flipped, setFlipped] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setFlipped(true);
+    }, 2500 + delay); // 2.5 detik + delay tambahan
+    return () => clearTimeout(timer);
+  }, [delay]);
+
+  return (
+    <div className="text-center perspective-[1000px]">
+      <motion.div
+        className="relative w-44 h-44 mx-auto mb-6"
+        style={{ transformStyle: "preserve-3d" }}
+        animate={{ rotateY: flipped ? 180 : 0 }}
+        transition={{ duration: 0.9, ease: [0.4, 0.0, 0.2, 1] }}>
+        {/* ===== Sisi Depan (Nama) ===== */}
+        <div
+          className="absolute inset-0 rounded-full bg-gradient-to-br from-soft-pink to-blush 
+                     flex flex-col items-center justify-center shadow-xl border-[5px] border-white
+                     backface-hidden"
+          style={{ backfaceVisibility: "hidden" }}>
+          <span className="font-script text-5xl text-brown leading-none">
+            {name.charAt(0)}
+          </span>
+          <span className="text-xs text-taupe mt-1 tracking-wider uppercase">
+            {name}
+          </span>
+        </div>
+
+        {/* ===== Sisi Belakang (Foto) ===== */}
+        <div
+          className="absolute inset-0 rounded-full overflow-hidden shadow-xl border-[5px] border-white
+                     backface-hidden"
+          style={{
+            backfaceVisibility: "hidden",
+            transform: "rotateY(180deg)",
+          }}>
+          <img
+            src={image}
+            alt={fullName}
+            className="w-full h-full object-cover object-top"
+          />
+        </div>
+      </motion.div>
+
+      {/* Nama lengkap di bawah */}
+      <motion.h3
+        className="font-serif text-2xl text-brown mb-1"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3 + delay / 1000 }}>
+        {fullName}
+      </motion.h3>
+      <p className="text-sm text-taupe">
+        {name === couple.bride.name ? "Mempelai Wanita" : "Mempelai Pria"}
+      </p>
+    </div>
+  );
+}
+
 // ============ HOOKS ============
 function useCountdown(target: Date) {
   const [timeLeft, setTimeLeft] = useState({
@@ -101,7 +175,9 @@ function useCountdown(target: Date) {
       }
       setTimeLeft({
         days: Math.floor(distance / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+        hours: Math.floor(
+          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
+        ),
         minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
         seconds: Math.floor((distance % (1000 * 60)) / 1000),
       });
@@ -128,8 +204,7 @@ function AnimatedSection({
       initial="hidden"
       whileInView="visible"
       viewport={{ once: false, amount: 0.35 }}
-      variants={sectionVariants}
-    >
+      variants={sectionVariants}>
       {children}
     </motion.section>
   );
@@ -150,8 +225,7 @@ function Cover({ onOpen }: { onOpen: () => void }) {
       initial={{ opacity: 1 }}
       exit={{ opacity: 0, y: -40 }}
       transition={{ duration: 0.7 }}
-      className="fixed inset-0 z-50 flex flex-col items-center justify-center overflow-hidden"
-    >
+      className="fixed inset-0 z-50 flex flex-col items-center justify-center overflow-hidden">
       {/* Background + Ken Burns (hanya di cover) */}
       <motion.div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-kenburns"
@@ -170,8 +244,7 @@ function Cover({ onOpen }: { onOpen: () => void }) {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 0.8 }}
-        className="relative z-10 text-center px-6"
-      >
+        className="relative z-10 text-center px-6">
         {displayGuestName && (
           <div className="mb-8">
             <p className="text-white/70 text-xs tracking-[0.2em] uppercase mb-1 drop-shadow">
@@ -185,7 +258,7 @@ function Cover({ onOpen }: { onOpen: () => void }) {
         )}
 
         <p className="text-white/80 tracking-[0.3em] text-sm uppercase mb-4 drop-shadow-md">
-          The Wedding Of
+          The Engagement Of
         </p>
 
         <h1 className="font-script text-6xl md:text-7xl text-white mb-2 drop-shadow-lg">
@@ -208,16 +281,14 @@ function Cover({ onOpen }: { onOpen: () => void }) {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.97 }}
           onClick={onOpen}
-          className="px-10 py-3.5 bg-white/95 text-brown rounded-full font-medium tracking-wide shadow-xl hover:bg-white transition-colors"
-        >
+          className="px-10 py-3.5 bg-white/95 text-brown rounded-full font-medium tracking-wide shadow-xl hover:bg-white transition-colors">
           Buka Undangan
         </motion.button>
 
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ repeat: Infinity, duration: 1.5 }}
-          className="mt-12"
-        >
+          className="mt-12">
           <ChevronDown className="w-6 h-6 text-white/80 mx-auto drop-shadow" />
         </motion.div>
       </motion.div>
@@ -239,12 +310,13 @@ function Countdown() {
       {items.map((item) => (
         <div
           key={item.label}
-          className="bg-white/80 backdrop-blur-sm rounded-2xl p-3 text-center shadow-sm border border-white/40"
-        >
+          className="bg-white/80 backdrop-blur-sm rounded-2xl p-3 text-center shadow-sm border border-white/40">
           <div className="font-serif text-2xl md:text-3xl font-semibold text-brown">
             {String(item.value).padStart(2, "0")}
           </div>
-          <div className="text-xs text-taupe mt-1 tracking-wide">{item.label}</div>
+          <div className="text-xs text-taupe mt-1 tracking-wide">
+            {item.label}
+          </div>
         </div>
       ))}
     </div>
@@ -283,8 +355,7 @@ function CopyButton({ text }: { text: string }) {
   return (
     <button
       onClick={copy}
-      className="inline-flex items-center gap-1.5 text-sm text-taupe hover:text-brown transition-colors"
-    >
+      className="inline-flex items-center gap-1.5 text-sm text-taupe hover:text-brown transition-colors">
       {copied ? (
         <Check className="w-4 h-4 text-green-600" />
       ) : (
@@ -321,9 +392,12 @@ function MusicPlayer({
       <button
         onClick={() => setPlaying(!playing)}
         className="fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full bg-brown text-cream shadow-lg flex items-center justify-center hover:bg-dark transition-colors"
-        aria-label={playing ? "Pause music" : "Play music"}
-      >
-        {playing ? <Pause className="w-5 h-5" /> : <Music className="w-5 h-5" />}
+        aria-label={playing ? "Pause music" : "Play music"}>
+        {playing ? (
+          <Pause className="w-5 h-5" />
+        ) : (
+          <Music className="w-5 h-5" />
+        )}
       </button>
     </>
   );
@@ -362,7 +436,7 @@ export default function App() {
           <AnimatedSection>
             <div className="text-center max-w-lg mx-auto">
               <p className="text-white/80 tracking-[0.3em] text-sm uppercase mb-3 drop-shadow">
-                The Wedding Of
+                The Engagement Of
               </p>
               <h1 className="font-script text-5xl md:text-6xl text-white leading-tight drop-shadow-lg">
                 {couple.bride.name} & {couple.groom.name}
@@ -375,12 +449,11 @@ export default function App() {
               <Countdown />
 
               <p className="mt-12 text-sm text-white/80 italic max-w-sm mx-auto leading-relaxed drop-shadow">
-                "Demikianlah mereka bukan lagi dua, melainkan satu. Karena itu,
-                apa yang telah dipersatukan Allah, tidak boleh diceraikan
-                manusia."
+                "⁠⁠Dan di atas semuanya itu: kenakanlah kasih, sebagai pengikat
+                yang mempersatukan dan menyempurnakan"
               </p>
               <p className="text-xs text-rose-200 mt-2 drop-shadow">
-                ~ Matius 19:6 ~
+                ~ Kolose 3:14 ~
               </p>
             </div>
           </AnimatedSection>
@@ -388,26 +461,23 @@ export default function App() {
           {/* BRIDE & GROOM */}
           <AnimatedSection>
             <SectionTitle subtitle="Mempelai">Bride & Groom</SectionTitle>
-            <div className="max-w-3xl mx-auto grid md:grid-cols-2 gap-8">
-              <div className="text-center bg-white/85 backdrop-blur-md rounded-3xl p-8 shadow-lg border border-white/40">
-                <div className="w-28 h-28 mx-auto rounded-full bg-gradient-to-br from-soft-pink to-blush flex items-center justify-center mb-5 shadow-inner">
-                  <span className="font-script text-4xl text-brown">E</span>
-                </div>
-                <h3 className="font-serif text-2xl text-brown mb-1">
-                  {couple.bride.fullName}
-                </h3>
-                <p className="text-sm text-taupe mt-3">{couple.bride.parents}</p>
-              </div>
 
-              <div className="text-center bg-white/85 backdrop-blur-md rounded-3xl p-8 shadow-lg border border-white/40">
-                <div className="w-28 h-28 mx-auto rounded-full bg-gradient-to-br from-soft-pink to-blush flex items-center justify-center mb-5 shadow-inner">
-                  <span className="font-script text-4xl text-brown">I</span>
-                </div>
-                <h3 className="font-serif text-2xl text-brown mb-1">
-                  {couple.groom.fullName}
-                </h3>
-                <p className="text-sm text-taupe mt-3">{couple.groom.parents}</p>
-              </div>
+            <div className="max-w-3xl mx-auto grid md:grid-cols-2 gap-10 md:gap-16">
+              {/* Bride */}
+              <FlipCard
+                name={couple.bride.name}
+                fullName={couple.bride.fullName}
+                image={brideImg}
+                delay={0}
+              />
+
+              {/* Groom */}
+              <FlipCard
+                name={couple.groom.name}
+                fullName={couple.groom.fullName}
+                image={groomImg}
+                delay={300} // sedikit delay supaya tidak flip bareng
+              />
             </div>
           </AnimatedSection>
 
@@ -418,8 +488,7 @@ export default function App() {
               {events.map((ev) => (
                 <div
                   key={ev.title}
-                  className="bg-white/85 backdrop-blur-md rounded-3xl p-8 shadow-lg border border-white/40"
-                >
+                  className="bg-white/85 backdrop-blur-md rounded-3xl p-8 shadow-lg border border-white/40">
                   <div className="flex flex-col md:flex-row md:items-center gap-6">
                     <div className="flex-shrink-0 text-center md:text-left">
                       <p className="text-taupe text-sm tracking-widest uppercase">
@@ -449,8 +518,7 @@ export default function App() {
                         href={ev.maps}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 mt-4 px-5 py-2 text-sm bg-brown text-cream rounded-full hover:bg-dark transition-colors"
-                      >
+                        className="inline-flex items-center gap-2 mt-4 px-5 py-2 text-sm bg-brown text-cream rounded-full hover:bg-dark transition-colors">
                         <MapPin className="w-4 h-4" /> Lihat Maps
                       </a>
                     </div>
@@ -467,8 +535,7 @@ export default function App() {
               {loveStory.map((story) => (
                 <div
                   key={story.title}
-                  className="bg-white/85 backdrop-blur-md rounded-2xl p-6 shadow-lg border border-white/40"
-                >
+                  className="bg-white/85 backdrop-blur-md rounded-2xl p-6 shadow-lg border border-white/40">
                   {story.year && (
                     <span className="text-xs tracking-widest text-rose uppercase">
                       {story.year}
@@ -487,7 +554,7 @@ export default function App() {
 
           {/* WEDDING GIFT */}
           <AnimatedSection>
-            <SectionTitle subtitle="Hadiah">Wedding Gift</SectionTitle>
+            <SectionTitle subtitle="Hadiah">Engagement Gift</SectionTitle>
             <p className="text-center text-sm text-white/80 max-w-md mx-auto mb-8 leading-relaxed drop-shadow">
               Doa restu Anda merupakan karunia yang sangat berarti bagi kami.
               Namun jika memberi adalah ungkapan tanda kasih, kami akan senang
@@ -497,8 +564,7 @@ export default function App() {
               {bankAccounts.map((acc) => (
                 <div
                   key={acc.bank}
-                  className="bg-white/85 backdrop-blur-md rounded-2xl p-5 flex items-center justify-between border border-white/40 shadow-lg"
-                >
+                  className="bg-white/85 backdrop-blur-md rounded-2xl p-5 flex items-center justify-between border border-white/40 shadow-lg">
                   <div>
                     <p className="text-xs text-taupe uppercase tracking-wide">
                       {acc.bank}
