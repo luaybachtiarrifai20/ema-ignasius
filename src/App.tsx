@@ -12,8 +12,8 @@ import {
   Check,
 } from "lucide-react";
 import bgUtama from "./assets/bg-utama.jpg";
-import brideImg from "./assets/brideImg.png";
-import groomImg from "./assets/groomImg.png";
+// import brideImg from "./assets/brideImg.png";
+// import groomImg from "./assets/groomImg.png";
 import song from "./assets/Crazier.mp3";
 import { useWedding } from "./context/WeddingContext";
 import { RsvpSection } from "./components/RsvpSection";
@@ -84,82 +84,82 @@ const sectionVariants = {
   },
 };
 
-function FlipCard({
-  name,
-  fullName,
-  image,
-  delay = 0,
-}: {
-  name: string;
-  fullName: string;
-  image: string;
-  delay?: number;
-}) {
-  const [flipped, setFlipped] = useState(false);
+// function FlipCard({
+//   name,
+//   fullName,
+//   image,
+//   delay = 0,
+// }: {
+//   name: string;
+//   fullName: string;
+//   image: string;
+//   delay?: number;
+// }) {
+//   const [flipped, setFlipped] = useState(false);
 
-  useEffect(() => {
-    // Mulai setelah delay awal
-    const startTimer = setTimeout(() => {
-      setFlipped(true); // pertama kali flip ke foto
-    }, 2200 + delay);
+//   useEffect(() => {
+//     // Mulai setelah delay awal
+//     const startTimer = setTimeout(() => {
+//       setFlipped(true); // pertama kali flip ke foto
+//     }, 2200 + delay);
 
-    // Setelah itu berganti terus setiap 3.5 detik
-    const interval = setInterval(() => {
-      setFlipped((prev) => !prev);
-    }, 3500);
+//     // Setelah itu berganti terus setiap 3.5 detik
+//     const interval = setInterval(() => {
+//       setFlipped((prev) => !prev);
+//     }, 3500);
 
-    return () => {
-      clearTimeout(startTimer);
-      clearInterval(interval);
-    };
-  }, [delay]);
+//     return () => {
+//       clearTimeout(startTimer);
+//       clearInterval(interval);
+//     };
+//   }, [delay]);
 
-  return (
-    <div className="text-center" style={{ perspective: "1000px" }}>
-      <motion.div
-        className="relative w-44 h-44 mx-auto mb-6"
-        style={{ transformStyle: "preserve-3d" }}
-        animate={{ rotateY: flipped ? 180 : 0 }}
-        transition={{
-          duration: 0.85,
-          ease: [0.4, 0.0, 0.2, 1],
-        }}>
-        {/* ===== Sisi Depan (Nama) ===== */}
-        <div
-          className="absolute inset-0 rounded-full bg-gradient-to-br from-soft-pink to-blush 
-                     flex flex-col items-center justify-center shadow-xl border-[5px] border-white"
-          style={{ backfaceVisibility: "hidden" }}>
-          <span className="font-script text-5xl text-brown leading-none">
-            {name.charAt(0)}
-          </span>
-          <span className="text-xs text-taupe mt-1 tracking-wider uppercase">
-            {name}
-          </span>
-        </div>
+//   return (
+//     <div className="text-center" style={{ perspective: "1000px" }}>
+//       <motion.div
+//         className="relative w-44 h-44 mx-auto mb-6"
+//         style={{ transformStyle: "preserve-3d" }}
+//         animate={{ rotateY: flipped ? 180 : 0 }}
+//         transition={{
+//           duration: 0.85,
+//           ease: [0.4, 0.0, 0.2, 1],
+//         }}>
+//         {/* ===== Sisi Depan (Nama) ===== */}
+//         <div
+//           className="absolute inset-0 rounded-full bg-gradient-to-br from-soft-pink to-blush 
+//                      flex flex-col items-center justify-center shadow-xl border-[5px] border-white"
+//           style={{ backfaceVisibility: "hidden" }}>
+//           <span className="font-script text-5xl text-brown leading-none">
+//             {name.charAt(0)}
+//           </span>
+//           <span className="text-xs text-taupe mt-1 tracking-wider uppercase">
+//             {name}
+//           </span>
+//         </div>
 
-        {/* ===== Sisi Belakang (Foto) ===== */}
-        <div
-          className="absolute inset-0 rounded-full overflow-hidden shadow-xl border-[5px] border-white"
-          style={{
-            backfaceVisibility: "hidden",
-            transform: "rotateY(180deg)",
-          }}>
-          <img
-            src={image}
-            alt={fullName}
-            className="w-full h-full object-cover object-top"
-          />
-        </div>
-      </motion.div>
+//         {/* ===== Sisi Belakang (Foto) ===== */}
+//         <div
+//           className="absolute inset-0 rounded-full overflow-hidden shadow-xl border-[5px] border-white"
+//           style={{
+//             backfaceVisibility: "hidden",
+//             transform: "rotateY(180deg)",
+//           }}>
+//           <img
+//             src={image}
+//             alt={fullName}
+//             className="w-full h-full object-cover object-top"
+//           />
+//         </div>
+//       </motion.div>
 
-      {/* Nama lengkap */}
-      <h3 className="font-serif text-2xl text-white mb-1">{fullName}</h3>
-      <p className="text-sm text-white/80">
-        {name === couple.bride.name ? "Mempelai Wanita" : "Mempelai Pria"}
-      </p>
-    </div>
-  );
-}
+//       {/* Nama lengkap */}
+//       <h3 className="font-serif text-2xl text-white mb-1">{fullName}</h3>
+//       <p className="text-sm text-white/80">
+//         {name === couple.bride.name ? "Mempelai Wanita" : "Mempelai Pria"}
+//       </p>
+//     </div>
+//   );
+// }
 
 // ============ HOOKS ============
 function useCountdown(target: Date) {
@@ -474,7 +474,7 @@ export default function App() {
                 <h3 className="font-serif text-2xl text-brown mb-1">
                   {couple.bride.fullName}
                 </h3>
-                <p className="text-sm text-taupe mt-3">{couple.bride.parents}</p>
+                {/* <p className="text-sm text-taupe mt-3">{couple.bride.parents}</p> */}
               </div>
 
               <div className="text-center bg-white/85 backdrop-blur-md rounded-3xl p-8 shadow-lg border border-white/40">
@@ -484,7 +484,7 @@ export default function App() {
                 <h3 className="font-serif text-2xl text-brown mb-1">
                   {couple.groom.fullName}
                 </h3>
-                <p className="text-sm text-taupe mt-3">{couple.groom.parents}</p>
+                {/* <p className="text-sm text-taupe mt-3">{couple.groom.parents}</p> */}
               </div>
             </div>
           </AnimatedSection>
