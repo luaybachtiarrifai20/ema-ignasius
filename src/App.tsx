@@ -98,24 +98,36 @@ function FlipCard({
   const [flipped, setFlipped] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setFlipped(true);
-    }, 2500 + delay); // 2.5 detik + delay tambahan
-    return () => clearTimeout(timer);
+    // Mulai setelah delay awal
+    const startTimer = setTimeout(() => {
+      setFlipped(true); // pertama kali flip ke foto
+    }, 2200 + delay);
+
+    // Setelah itu berganti terus setiap 3.5 detik
+    const interval = setInterval(() => {
+      setFlipped((prev) => !prev);
+    }, 3500);
+
+    return () => {
+      clearTimeout(startTimer);
+      clearInterval(interval);
+    };
   }, [delay]);
 
   return (
-    <div className="text-center perspective-[1000px]">
+    <div className="text-center" style={{ perspective: "1000px" }}>
       <motion.div
         className="relative w-44 h-44 mx-auto mb-6"
         style={{ transformStyle: "preserve-3d" }}
         animate={{ rotateY: flipped ? 180 : 0 }}
-        transition={{ duration: 0.9, ease: [0.4, 0.0, 0.2, 1] }}>
+        transition={{
+          duration: 0.85,
+          ease: [0.4, 0.0, 0.2, 1],
+        }}>
         {/* ===== Sisi Depan (Nama) ===== */}
         <div
           className="absolute inset-0 rounded-full bg-gradient-to-br from-soft-pink to-blush 
-                     flex flex-col items-center justify-center shadow-xl border-[5px] border-white
-                     backface-hidden"
+                     flex flex-col items-center justify-center shadow-xl border-[5px] border-white"
           style={{ backfaceVisibility: "hidden" }}>
           <span className="font-script text-5xl text-brown leading-none">
             {name.charAt(0)}
@@ -127,8 +139,7 @@ function FlipCard({
 
         {/* ===== Sisi Belakang (Foto) ===== */}
         <div
-          className="absolute inset-0 rounded-full overflow-hidden shadow-xl border-[5px] border-white
-                     backface-hidden"
+          className="absolute inset-0 rounded-full overflow-hidden shadow-xl border-[5px] border-white"
           style={{
             backfaceVisibility: "hidden",
             transform: "rotateY(180deg)",
@@ -141,14 +152,8 @@ function FlipCard({
         </div>
       </motion.div>
 
-      {/* Nama lengkap di bawah */}
-      <motion.h3
-        className="font-serif text-2xl text-white mb-1"
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3 + delay / 1000 }}>
-        {fullName}
-      </motion.h3>
+      {/* Nama lengkap */}
+      <h3 className="font-serif text-2xl text-white mb-1">{fullName}</h3>
       <p className="text-sm text-white/80">
         {name === couple.bride.name ? "Mempelai Wanita" : "Mempelai Pria"}
       </p>
