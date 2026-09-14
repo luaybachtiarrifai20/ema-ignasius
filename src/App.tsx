@@ -466,23 +466,26 @@ export default function App() {
           {/* BRIDE & GROOM */}
           <AnimatedSection>
             <SectionTitle subtitle="Mempelai">Bride & Groom</SectionTitle>
+            <div className="max-w-3xl mx-auto grid md:grid-cols-2 gap-8">
+              <div className="text-center bg-white/85 backdrop-blur-md rounded-3xl p-8 shadow-lg border border-white/40">
+                <div className="w-28 h-28 mx-auto rounded-full bg-gradient-to-br from-soft-pink to-blush flex items-center justify-center mb-5 shadow-inner">
+                  <span className="font-script text-4xl text-brown">E</span>
+                </div>
+                <h3 className="font-serif text-2xl text-brown mb-1">
+                  {couple.bride.fullName}
+                </h3>
+                <p className="text-sm text-taupe mt-3">{couple.bride.parents}</p>
+              </div>
 
-            <div className="max-w-3xl mx-auto grid md:grid-cols-2 gap-10 md:gap-16">
-              {/* Bride */}
-              <FlipCard
-                name={couple.bride.name}
-                fullName={couple.bride.fullName}
-                image={brideImg}
-                delay={0}
-              />
-
-              {/* Groom */}
-              <FlipCard
-                name={couple.groom.name}
-                fullName={couple.groom.fullName}
-                image={groomImg}
-                delay={300} // sedikit delay supaya tidak flip bareng
-              />
+              <div className="text-center bg-white/85 backdrop-blur-md rounded-3xl p-8 shadow-lg border border-white/40">
+                <div className="w-28 h-28 mx-auto rounded-full bg-gradient-to-br from-soft-pink to-blush flex items-center justify-center mb-5 shadow-inner">
+                  <span className="font-script text-4xl text-brown">I</span>
+                </div>
+                <h3 className="font-serif text-2xl text-brown mb-1">
+                  {couple.groom.fullName}
+                </h3>
+                <p className="text-sm text-taupe mt-3">{couple.groom.parents}</p>
+              </div>
             </div>
           </AnimatedSection>
 
