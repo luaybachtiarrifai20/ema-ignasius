@@ -14,7 +14,7 @@ import {
 import bgUtama from "./assets/bg-utama.jpg";
 // import brideImg from "./assets/brideImg.png";
 // import groomImg from "./assets/groomImg.png";
-import song from "./assets/Crazier.mp3";
+import song from "./assets/musik.mp3";
 import { useWedding } from "./context/WeddingContext";
 import { RsvpSection } from "./components/RsvpSection";
 
@@ -41,7 +41,7 @@ const events = [
     date: "10",
     month: "Oktober",
     year: "2026",
-    time: "18.00",
+    time: "19.00 - selesai",
     place: "Sejabin, Dusun Engkersik 1, Desa Engkersik, Kec. Sekadau Hilir",
     maps: "https://www.google.com/maps/place/Engkersik,+Kec.+Sekadau+Hilir,+Kabupaten+Sekadau,+Kalimantan+Barat/@-0.0893511,111.0541635,13z/data=!3m1!4b1!4m6!3m5!1s0x2e01f89e4a57785b:0x59291de55ed2906c!8m2!3d-0.0783852!4d111.1056539!16s%2Fg%2F121p7c7k?entry=ttu&g_ep=EgoyMDI2MDkwOS4wIKXMDSoASAFQAw%3D%3D",
   },
@@ -465,7 +465,7 @@ export default function App() {
 
           {/* BRIDE & GROOM */}
           <AnimatedSection>
-            <SectionTitle subtitle="Mempelai">Bride & Groom</SectionTitle>
+            <SectionTitle subtitle="Mempelai">Fiance & Fiancee</SectionTitle>
             <div className="max-w-3xl mx-auto grid md:grid-cols-2 gap-8">
               <div className="text-center bg-white/85 backdrop-blur-md rounded-3xl p-8 shadow-lg border border-white/40">
                 <div className="w-28 h-28 mx-auto rounded-full bg-gradient-to-br from-soft-pink to-blush flex items-center justify-center mb-5 shadow-inner">
