@@ -14,7 +14,7 @@ import {
 import bgUtama from "./assets/bg-utama.jpg";
 // import brideImg from "./assets/brideImg.png";
 // import groomImg from "./assets/groomImg.png";
-import song from "./assets/musik.mp3";
+import song from "./assets/Crazier.mp3";
 import { useWedding } from "./context/WeddingContext";
 import { RsvpSection } from "./components/RsvpSection";
 
