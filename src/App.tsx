@@ -43,7 +43,7 @@ const events = [
     year: "2026",
     time: "19.00 - selesai",
     place: "Sejabin, Dusun Engkersik 1, Desa Engkersik, Kec. Sekadau Hilir",
-    maps: "https://www.google.com/maps/place/Engkersik,+Kec.+Sekadau+Hilir,+Kabupaten+Sekadau,+Kalimantan+Barat/@-0.0893511,111.0541635,13z/data=!3m1!4b1!4m6!3m5!1s0x2e01f89e4a57785b:0x59291de55ed2906c!8m2!3d-0.0783852!4d111.1056539!16s%2Fg%2F121p7c7k?entry=ttu&g_ep=EgoyMDI2MDkwOS4wIKXMDSoASAFQAw%3D%3D",
+    maps: "https://www.google.com/maps/place/Gereja+Katolik+St.+Gabriel+Sejabin/@-0.0452489,111.098933,3a,75y,277.92h,78.12t/data=!3m7!1e1!3m5!1sUDgJtcudYhJIn1L7sFpDDA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D11.87605009796114%26panoid%3DUDgJtcudYhJIn1L7sFpDDA%26yaw%3D277.9226517702676!7i16384!8i8192!4m6!3m5!1s0x2e01ff8f218d794d:0x882da4ea3d456daf!8m2!3d-0.0437954!4d111.0977864!16s%2Fg%2F11lcc0d0r0?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoASAFQAw%3D%3D",
   },
 ];
 
